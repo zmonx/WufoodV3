@@ -18,7 +18,27 @@ import { useTheme } from 'react-native-paper';
 
 import { AuthContext } from '../components/context';
 
-import Users from '../model/users';
+// import Users from '../model/users';
+
+
+
+
+// const login =  () => {
+
+
+    
+//     let Users = [];
+//     const url = "http://172.16.29.44/wufoodapi/login_api.php"
+//     return fetch(url)
+//     .then(response => response.json())
+//     .then((responseJson) => {
+//         Users = responseJson.user
+        
+//     }) 
+    
+
+// }
+// console.log(Users)
 
 const SignInScreen = ({navigation}) => {
 
@@ -90,8 +110,20 @@ const SignInScreen = ({navigation}) => {
         }
     }
 
-    const loginHandle = (userName, password) => {
+    let Users = [];
 
+    fetch("http://172.16.29.44/wufoodapi/login_api.php")
+      .then(res => res.json())
+      .then(products => {
+        Users = products;
+        let productHtml = "";
+        products.forEach(function(item) {
+          //Here I just insert the data to the HTML
+        });
+      })
+      .catch(err => console.log("Error in Fetch: " + err));
+
+    const loginHandle = (userName, password) => {
         const foundUser = Users.filter( item => {
             return userName == item.username && password == item.password;
         } );
